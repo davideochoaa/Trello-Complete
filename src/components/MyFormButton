@@ -1,0 +1,10 @@
+function MyFormButton({ type, onClickHandler, children }) {
+  //const { type, onClickHandler, children } = props;
+  //const {  children } = rest;
+  return (
+    <button type={type} onClick={onClickHandler} className="add-card">
+      {children}
+    </button>
+  );
+}
+export default MyFormButton;

@@ -1,0 +1,9 @@
+.form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  max-width: 33%;
+}
+.title {
+}
