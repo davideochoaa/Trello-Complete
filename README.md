@@ -1,27 +1,149 @@
-## 1 : get delle Dashboard
+# Week 5 Esercitazione di gruppo
 
-### alzare il server dell'es precedente. Modificare la chiamata affinche non serva un utente specifico ma solo e soltanto il contenuto per creare una dashboard( utilizzando id dashboad). Fare questo non appena il componente è visibile sulla schermata ( componentDidMount )
+Gli obbiettivi/task da svolgere sono i seguenti:
 
-## 2 : salvare il risultato della chiamata
+## COMPORTAMENTI NOTI DELLE ICONE
 
-### invocata la promise , aspettare risoluzione della promise e salvare il risultato dentro il componente.
+### 1.HOVER COMMENT, LIKES, ATTACHMENTS SONO DIVERSI TRA LORO [40S]
+### 2.AL CLICK DI OGNUNO DI LORO SI INNESCA UNA FUNZIONE DIVERSA [3MIN]
+### 3.QUANDO L'ICON DEL LIKE è CLICCATA DEVE DIVENTARE FISSA PIENA, SE HOVERO SOPRA FUNZIONA COMUNQUE [10MIN]
+### 4.COMPONENTIZZARE LA CARD (INDIVIDUARE COMPONENTI COMUNI ED INSERIRLI NELLA CARD) [30MIN]
+### 5.GESTIRE IMMAGINE SOPRA LA CARD, SE C'E' DEVE VEDERSI, SE NON C'E' LA CARD E' VUOTA [15MIN]
+### 6.GESTIRE DIVERSE LABEL SULLA CARTA (OGNI LABEL HA UN COLORE) [10MIN]
+### 7. TRASFORMARE IL FORM CHE GIA' ABBIAMO NEL FORM CHE ABBIAMO SUL DESIGN
 
-## 3: all'interno del render utilizzare i dati dell'api per renderizzare la giusta UI
+Per clonare la repository 
 
-### Utilizzare risultato della precendete chiamata per associare a ogni dato la sua parte di UI
+```sh
+git clone git@github.com:davideochoaa/nodejs-trello-esercitazione.git
+``
 
-## 4: fare in modo di avere un riferimento o un identificativo della dashboard(bucket)
+```sh
+git clone https://github.com/davideochoaa/nodejs-trello-esercitazione.git
+```
 
-### Quando il popoup si chiude l'id del bucket attivo sarà vuoto.
+Per installare tutte le dipendenze necessarie, aprire la cartella da terminale ed eseguire:
 
-## 5: collegare la comparsa del form al click del bottone nel bucket
+```sh
+npm install
+```
 
-### easy
+Per avviare il server 
 
-## 6: chiamare l'api create del contenuto ( creazione della carta ) al click del submit nel form
+```sh
+npm run start
+```
 
-### easy per gigi
+in alternativa eseguire questi due comandi secondo l'ordine mostrato
 
-## 7: refresh dashboard(n card+1 )
+```sh
+npx tsc --watch
+npx nodemon dist/src/index.js
+npx nodemon dist/index.js
+```
 
-### dipende
+Se effettuate modifiche pushare solo ed esclusivamente su branch develop. Spostarsi quindi nel branch "develop" con il seguente comando
+
+```sh
+git checkout develop
+```
+
+ed effettuare il push. In alternativa
+
+```sh
+git push origin develop
+```
+
+Utilizzare Insomnia o Postman per il test delle richieste.
+
+# INSOMNIA O POSTMAN - TEST DELLE RICHIESTE API
+
+Per poter testare le richieste api avremmo bisogno di insomnia o postman e configurare al meglio ogni richiesta.
+
+
+## 1. EFFETTUARE LA REGISTRAZIONE DI UN UTENTE METODO POST. - INSERIRE NELL'URL :
+
+```sh
+http://localhost:3333/user/register
+```
+INSERIRE ALL'INTERNO DEL BODY (JSON) [ESEMPIO]
+```sh
+{
+	"email" : "ginopaoli@gimail.gino",
+	"password" : "ginogino",
+	"name" : "Gino Paoli"
+}
+```
+(BEARER TOKEN NON NECESSARIO)
+
+
+## 2. EFFETTUARE IL LOGIN DI UN UTENTE TRAMITE METODO POST. - INSERIRE NELL'URL :
+
+```sh
+http://localhost:3333/user/login
+```
+INSERIRE ALL'INTERNO DEL BODY (JSON) [ESEMPIO]
+```sh
+{
+	"email" : "ginopaoli@gimail.gino",
+	"password" : "ginogino"
+}
+```
+:warning: **COPIARE IL BEARER TOKEN**: Dovrai utilizzare il Bearer Token all'interno di [Auth - Selezionando BEARER come metodo di autenticazione]
+
+
+## 3. VISUALIZZARE TUTTE LE DASHBOARD DI UN UTENTE TRAMITE METODO GET - INSERIRE NELL'URL :
+
+```sh
+http://localhost:3333/api/list
+```
+:warning: **UTILIZZARE IL BEARER TOKEN ALL'INTERNO DI [AUTH]**
+
+
+## 4. CREARE UNA DASHBOARD TRAMITE METODO POST.
+INSERIRE NELL'URL :
+
+```sh
+http://localhost:3333/api/
+```
+INSERIRE ALL'INTERNO DEL BODY (JSON) [ESEMPIO]
+```sh
+{
+	"name" : "NUOVA DASHBOARD DI GINO"
+}
+```
+:warning: **UTILIZZARE IL BEARER TOKEN ALL'INTERNO DI [AUTH]**
+
+
+## 5. CREARE UN CONTENUTO ALL'INTERNO DI UNA DASHBOARD TRAMITE METODO POST - INSERIRE NELL'URL E SOSTITUIRE :IDDASHBOARD CON L'ID DELLA DASHBOARD NELLA QUALE SI VUOLE CREARE IL CONTENUTO:
+
+```sh
+http://localhost:3333/api/*:IDDASHBOARD*
+```
+INSERIRE ALL'INTERNO DEL BODY (JSON) [ESEMPIO]
+```sh
+{
+	"text" : "CONTENUTO DELLA MIA CARD ALL'INTERNO DELLA DASHBOARD DI GINO"
+}
+```
+:warning: **UTILIZZARE IL BEARER TOKEN ALL'INTERNO DI [AUTH]**
+
+## 6. ELIMINARE UNA DASHBOARD - INSERIRE NELL'URL E SOSTITUIRE :IDDASHBOARD CON L'ID DELLA DASHBOARD CHE VOGLIAMO ELIMINARE
+<BR>
+:warning: **Se la dashboard è piena non sarà possibile eliminare la dashboard, eliminare prima i contenuti della dashboard
+
+```sh
+http://localhost:3333/api/*:IDDASHBOARD*
+```
+:warning: **UTILIZZARE IL BEARER TOKEN ALL'INTERNO DI [AUTH]**
+
+## 7. ELIMINARE UN CONTENUTO ALL'INTERNO DI UNA DASHBOARD, SOSTITUIRE :IDDASHBOARD CON L'ID DELLA DASHBOARD CHE CONTIENE IL NOSTRO CONTENUTO E SOSTITUIRE :IDCONTENUTO CON L'ID DEL CONTENUTO CHE DESIDERIAMO ELIMINARE:
+
+```sh
+http://localhost:3333/api/*:IDDASHBOARD*/*:IDCONTENUTO
+```
+:warning: **UTILIZZARE IL BEARER TOKEN ALL'INTERNO DI [AUTH]**
+
+# CARTELLA DIST 
+Ho lasciato la cartella dist perché al suo interno vi è la cartella public con il relativo index.html e script.js - avviare index.html separatamente tramite il plugin di Visual Studio - Live Server . Per poter visualizzare completamente l'interfaccia grafica. 
+
